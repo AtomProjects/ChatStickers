@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Sticker Packs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>My Sticker Packs</h1>
+    <div class="sticker-packs">
+        {% for pack in sticker_packs %}
+            <div class="sticker-pack">
+                <h2>{{ pack.name }}</h2>
+                <div class="stickers">
+                    {% for sticker in pack.stickers %}
+                        <img src="{{ url_for('static', filename='stickers/pack1/' + sticker) }}" alt="{{ sticker }}">
+                    {% endfor %}
+                </div>
+                <a href="signal://addstickers?pack_id={{ pack.name }}&pack_key={{ pack.key }}" class="add-to-signal">Add to Signal</a>
+                <a href="{{ url_for('whatsapp_instructions') }}" class="add-to-whatsapp">Add to WhatsApp</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
